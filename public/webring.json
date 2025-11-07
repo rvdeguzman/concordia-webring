@@ -17,6 +17,18 @@
       "website": "https://juliencm.dev/",
       "year": 2027,
       "program": "COMP"
+    },
+{
+      "name": "Simon Stasovski",
+      "website": "https://simon-stasovski.github.io",
+      "year": 2027,
+      "program": "SOEN"
+    },
+    {
+      "name": "Jia Xuan Li",
+      "website": "https://jiaxuan.li/",
+      "year": 2027,
+      "program": "COMP"
     }
   ]
 }
