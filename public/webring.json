@@ -18,7 +18,7 @@
       "year": 2027,
       "program": "COMP"
     },
-{
+    {
       "name": "Simon Stasovski",
       "website": "https://simon-stasovski.github.io",
       "year": 2027,
@@ -35,6 +35,12 @@
       "website": "https://minhtrannhat.com/",
       "year": 2025,
       "program": "COEN"
+    },
+    {
+      "name": "Renaud Bernier",
+      "website": "https://renaudbernier.com",
+      "year": 2028,
+      "program": "SOEN"
     }
   ]
 }
