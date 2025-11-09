@@ -23,6 +23,8 @@ interface SidebarProps {
 }
 
 export function Sidebar({ sites, hoveredSite, onSiteHover, hoveredProgram, sortField, sortDirection, onSort }: SidebarProps) {
+    const [searchQuery, setSearchQuery] = useState('');
+
     const handleSort = (field: SortField) => {
         if (sortField === field) {
             onSort(field, sortDirection === 'asc' ? 'desc' : 'asc');
@@ -31,31 +33,42 @@ export function Sidebar({ sites, hoveredSite, onSiteHover, hoveredProgram, sortF
         }
     };
 
-    const sortedSites = [...sites].sort((a, b) => {
-        let aValue: string | number = '';
-        let bValue: string | number = '';
+    const filteredAndSortedSites = [...sites]
+        .filter((site) => {
+            if (!searchQuery.trim()) return true;
+            const query = searchQuery.toLowerCase();
+            return (
+                site.name.toLowerCase().includes(query) ||
+                site.website.toLowerCase().includes(query) ||
+                site.program.toLowerCase().includes(query) ||
+                site.year.toString().includes(query)
+            );
+        })
+        .sort((a, b) => {
+            let aValue: string | number = '';
+            let bValue: string | number = '';
 
-        switch (sortField) {
-            case 'name':
-                aValue = a.name.toLowerCase();
-                bValue = b.name.toLowerCase();
-                break;
-             case 'program':
-                aValue = a.program.toLowerCase();
-                bValue = b.program.toLowerCase();
-                break;
-            case 'year':
-                aValue = a.year;
-                bValue = b.year;
-                break;
-        }
+            switch (sortField) {
+                case 'name':
+                    aValue = a.name.toLowerCase();
+                    bValue = b.name.toLowerCase();
+                    break;
+                 case 'program':
+                    aValue = a.program.toLowerCase();
+                    bValue = b.program.toLowerCase();
+                    break;
+                case 'year':
+                    aValue = a.year;
+                    bValue = b.year;
+                    break;
+            }
 
-        if (typeof aValue === 'string' && typeof bValue === 'string') {
-            return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-        } else {
-            return sortDirection === 'asc' ? (aValue as number) - (bValue as number) : (bValue as number) - (aValue as number);
-        }
-    });
+            if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            } else {
+                return sortDirection === 'asc' ? (aValue as number) - (bValue as number) : (bValue as number) - (aValue as number);
+            }
+        });
 
     return (
         <div className="flex-1 overflow-hidden flex flex-col">
@@ -98,9 +111,26 @@ export function Sidebar({ sites, hoveredSite, onSiteHover, hoveredProgram, sortF
                   }
               `}</style>
              <div className="px-6 py-3" style={{ borderBottom: '1px solid var(--line)', animation: 'fadeIn 0.6s ease-in-out 0s both' }}>
-                 <h2 className="text-lg font-semibold" style={{ fontFamily: 'Iosevka, monospace' }}>
-                     Students ({sites.length})
-                 </h2>
+                 <div className="flex items-center gap-4">
+                     <h2 className="text-lg font-semibold" style={{ fontFamily: 'Iosevka, monospace' }}>
+                         Students ({sites.length})
+                     </h2>
+                     <input
+                         type="text"
+                         placeholder="Search by name, website, program, or year..."
+                         value={searchQuery}
+                         onChange={(e) => setSearchQuery(e.target.value)}
+                         onFocus={(e) => e.target.style.borderColor = 'var(--accent1)'}
+                         onBlur={(e) => e.target.style.borderColor = 'var(--line)'}
+                         className="flex-1 px-3 py-1.5 text-sm rounded border transition-colors focus:outline-none"
+                         style={{
+                             fontFamily: 'Iosevka, monospace',
+                             backgroundColor: 'var(--background)',
+                             borderColor: 'var(--line)',
+                             color: 'var(--foreground)',
+                         }}
+                     />
+                 </div>
              </div>
 
             <div className="flex-1 overflow-y-auto px-6 py-3">
@@ -134,7 +164,7 @@ export function Sidebar({ sites, hoveredSite, onSiteHover, hoveredProgram, sortF
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedSites.map((site, index) => (
+                        {filteredAndSortedSites.map((site, index) => (
                             <tr
                                 key={site.name}
                                 className={`hover:bg-hover transition-colors cursor-pointer ${hoveredProgram === site.program || hoveredSite === site.name ? 'bg-hover' : ''
