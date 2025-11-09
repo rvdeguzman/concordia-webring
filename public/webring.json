@@ -41,6 +41,18 @@
       "website": "https://renaudbernier.com",
       "year": 2028,
       "program": "SOEN"
+    },
+    {
+      "name": "Nathaniel Bechard",
+      "website": "https://natebechard.wixsite.com/nathaniel-bechard",
+      "year": 2028,
+      "program": "MECH"
+    },
+    {
+      "name": "Ranjit Singh Dhunna",
+      "website": "ranjitsinghdhunna.dev",
+      "year": 2028,
+      "program": "SOEN"
     }
   ]
 }

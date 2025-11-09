@@ -21,7 +21,7 @@ type SortDirection = 'asc' | 'desc';
 const DEFAULT_SIDEBAR_WIDTH = 800;
 const MIN_SIDEBAR_WIDTH = 250;
 const MAX_SIDEBAR_WIDTH = 800;
-const TABS = ['GCS', 'COMP', 'COEN', 'SOEN'];
+const TABS = ['GCS', 'COMP', 'COEN', 'SOEN', 'MECH', 'ELEC'];
 
 export default function Home() {
     const [webringData, setWebringData] = useState<WebringData | null>(null);
