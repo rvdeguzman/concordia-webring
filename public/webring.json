@@ -77,6 +77,12 @@
       "website": "https://icarus-2.github.io/",
       "year": 2026,
       "program": "COMP"
+    },
+    {
+      "name": "Julien Halde",
+      "website": "https://julienhalde.vercel.app/",
+      "year": 2028,
+      "program": "COMP"
     }
   ]
 }
