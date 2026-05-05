@@ -95,6 +95,12 @@
       "website": "https://juanita.dev",
       "year": 2030,
       "program": "COMP"
+    },
+    {
+      "name": "Kyle Veloso",
+      "website": "https://kyle-veloso-website.onrender.com/",
+      "year": 2029,
+      "program": "SOEN"
     }
   ]
 }
